@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
-
+import {Provider} from "@tarojs/redux"
+import store from "./store/store";
 import './app.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -13,8 +14,19 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/add/index',
+      'pages/addres/index',
+      'pages/my/index'
     ],
+    permission:{
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
+    
+    
+      
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -35,7 +47,8 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Provider store={store}><Index /></Provider>  
+      
     )
   }
 }
